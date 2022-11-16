@@ -15,26 +15,36 @@
         <module>crap-core</module>
         <module>crap-server</module>
         <module>crap-generator</module>
+        <module>crap-system</module>
+        <module>crap-test</module>
     </modules>
 
     <groupId>work.sajor</groupId>
     <artifactId>crap</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
 
     <name>crap</name>
     <description>Crap makes Java Web Simple.</description>
 
     <properties>
+        <crap.version>0.0.1</crap.version>
+
         <java.version>11</java.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <hutool.version>5.8.9</hutool.version>
         <mybatis-plus-generator.version>3.3.2</mybatis-plus-generator.version>
         <spring-data-commons.version>2.7.2</spring-data-commons.version>
         <swagger-version>1.5.0</swagger-version>
+        <druid.version>1.2.14</druid.version>
 
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>

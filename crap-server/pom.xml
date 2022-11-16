@@ -5,8 +5,7 @@
     <parent>
         <groupId>work.sajor</groupId>
         <artifactId>crap</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>0.0.1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -19,6 +18,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>work.sajor</groupId>
+            <artifactId>crap-system</artifactId>
+            <version>${crap.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>mysql</groupId>

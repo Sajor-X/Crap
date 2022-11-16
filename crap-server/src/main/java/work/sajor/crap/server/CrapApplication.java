@@ -1,7 +1,10 @@
 package work.sajor.crap.server;
 
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,6 +16,7 @@ import java.net.UnknownHostException;
 @Slf4j
 @SpringBootApplication
 @ComponentScan("work.sajor.crap")
+@MapperScan("work.sajor.crap")
 public class CrapApplication {
 
 	public static void main(String[] args) throws UnknownHostException {
