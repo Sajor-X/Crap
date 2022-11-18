@@ -28,7 +28,7 @@ import java.util.Scanner;
  * @author Sajor
  * @since 2022-11-10
  */
-public class GeneratorCrap {
+public class CrapGenerator {
 
     private static String author = "Sajor";
 
@@ -66,7 +66,7 @@ public class GeneratorCrap {
     }
 
     public static void main(String[] args) {
-        new GeneratorCrap().run();
+        new CrapGenerator().run();
     }
 
     public void run() {
