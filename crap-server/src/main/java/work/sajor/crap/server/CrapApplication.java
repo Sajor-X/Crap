@@ -16,7 +16,6 @@ import java.net.UnknownHostException;
 @Slf4j
 @SpringBootApplication
 @ComponentScan("work.sajor.crap")
-@MapperScan("work.sajor.crap")
 public class CrapApplication {
 
 	public static void main(String[] args) throws UnknownHostException {
