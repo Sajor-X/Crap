@@ -3,7 +3,6 @@ package work.sajor.crap.core.config;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * <p>
@@ -13,15 +12,15 @@ import org.springframework.context.annotation.Configuration;
  * @author Sajor
  * @since 2022-11-21
  */
-@Configuration
+//@Configuration
 @Data
-public class CrapConfig {
+public class ApplicationConfig {
 
-    private static CrapConfig self;
+    private static ApplicationConfig self;
 
     @Autowired
-    private void setKconeConfig(CrapConfig crapConfig) {
-        self = crapConfig;
+    private void setApplicationConfig(ApplicationConfig applicationConfig) {
+        self = applicationConfig;
     }
 
     /**
@@ -37,7 +36,7 @@ public class CrapConfig {
 
     // ------------------------------ static method ------------------------------
 
-    public static CrapConfig get() {
-        return self == null ? new CrapConfig() : self;
+    public static ApplicationConfig get() {
+        return self == null ? new ApplicationConfig() : self;
     }
 }
