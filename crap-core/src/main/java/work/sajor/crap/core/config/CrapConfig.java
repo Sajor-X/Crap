@@ -15,13 +15,13 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @Data
-public class ApplicationConfig {
+public class CrapConfig {
 
-    private static ApplicationConfig self;
+    private static CrapConfig self;
 
     @Autowired
-    private void setKconeConfig(ApplicationConfig applicationConfig) {
-        self = applicationConfig;
+    private void setKconeConfig(CrapConfig crapConfig) {
+        self = crapConfig;
     }
 
     /**
@@ -37,7 +37,7 @@ public class ApplicationConfig {
 
     // ------------------------------ static method ------------------------------
 
-    public static ApplicationConfig get() {
-        return self == null ? new ApplicationConfig() : self;
+    public static CrapConfig get() {
+        return self == null ? new CrapConfig() : self;
     }
 }
