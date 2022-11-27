@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import work.sajor.crap.core.mybatis.support.TableCode;
+import work.sajor.crap.core.mybatis.handler.AESEncryptHandler;
 import ${baseEntity};
 <#list table.fields as field>
     <#if field.comment?starts_with("enum") && !field.comment?starts_with("enum(")>
@@ -73,8 +74,13 @@ public class ${entity} implements Serializable,${baseEntity} {
         <#assign keyPropertyName="${field.propertyName}"/>
         <#assign keyPropertyType="${field.propertyType}"/>
     </#if>
+
     <#-- 检查是否有 JSON -->
     <#assign isJson = field.comment?starts_with("json")>
+
+    <#-- 检查是否需要加密 -->
+    <#assign isEncrypt = field.comment?starts_with("encrypt")>
+
     <#if field.comment!?length gt 0>
         <#if swagger2>
     @ApiModelProperty(value = "${field.comment}")
@@ -108,6 +114,8 @@ public class ${entity} implements Serializable,${baseEntity} {
     @TableField("`${field.name}`")
     <#elseif isJson>
     @TableField(value = "`${field.name}`", typeHandler = JacksonTypeHandler.class)
+    <#elseif isEncrypt>
+    @TableField(value = "`${field.name}`", typeHandler = AESEncryptHandler.class)
     <#else>
     @TableField("${fieldName}")
     </#if>
