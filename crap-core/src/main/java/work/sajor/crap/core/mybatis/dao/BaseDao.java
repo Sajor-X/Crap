@@ -13,6 +13,7 @@ import work.sajor.crap.core.mybatis.support.Wrapper;
 import work.sajor.crap.core.mybatis.util.EntityDictUtil;
 import work.sajor.crap.core.mybatis.util.EntityInfoUtil;
 import work.sajor.crap.core.mybatis.util.SqlUtil;
+import work.sajor.crap.core.session.SessionUtil;
 import work.sajor.crap.core.web.WebException;
 
 import javax.annotation.PostConstruct;
@@ -80,8 +81,7 @@ public class BaseDao<M extends Mapper<T>, T extends Entity> extends ServiceImpl<
     public Wrapper<T> getWrapper(boolean withTid) {
         Wrapper<T> wrapper = new Wrapper<>();
         if (withTid && getEntityInfo().getHasTid()) {
-            // TODO 获取租户 ID
-//            wrapper.eq(CommonFields.TID, SessionUtil.getUserTid());
+            wrapper.eq(CommonFields.TID, SessionUtil.getUserTid());
         }
         return wrapper;
     }

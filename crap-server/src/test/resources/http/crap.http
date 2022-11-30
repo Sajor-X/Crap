@@ -1,6 +1,28 @@
 POST {{host}}/t/list
-Authorization: {{auth}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJod29uYnRyaW90Iiwic3ViIjoiMSIsImlhdCI6MTY2OTgwOTU2OCwiZXhwIjoxOTMyNjM4MzY4fQ.gkpr0RLffK1Ea438jOOC1qHyxNt5g8ceR5F8qHhL0RM
 Content-Type: application/json;charset=UTF-8
 User-Agent: {{agent}}
 
 {"pageNo":1,"pageSize":2,"prefix":"","sort":[{"key":"code","order":"DESC"}],"where":[]}
+
+
+### 验证码
+GET {{host}}/crap/auth/captcha?ticket=1
+
+### 用户登陆接口
+POST {{host}}/crap/auth/login
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+
+username=sys&password=sys&ticket=1&verify=Syas
+
+> {%
+  client.global.set("auth_token", response.data.token);
+  client.log(response.data.token);
+%}
+
+
+### test
+GET {{host}}/a/view
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJod29uYnRyaW90Iiwic3ViIjoiMSIsImlhdCI6MTY2OTgwOTU2OCwiZXhwIjoxOTMyNjM4MzY4fQ.gkpr0RLffK1Ea438jOOC1qHyxNt5g8ceR5F8qHhL0RM
+
+

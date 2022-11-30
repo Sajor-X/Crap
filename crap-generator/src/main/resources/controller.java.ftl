@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 interface ${table.serviceName} : ${superServiceClass}<${entity}>
 <#else>
 @Repository
-@CacheConfig(cacheNames = "${table.controllerName}") // , keyGenerator = "cacheKeyGenerator")
+@CacheConfig(cacheNames = "${table.controllerName}", keyGenerator = "cacheKeyGenerator")
 public class ${table.serviceName} extends ${superServiceClass}<${table.controllerName}Mapper, ${table.controllerName}> {
 
 }

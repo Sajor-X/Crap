@@ -14,6 +14,9 @@ spring:
     password: ENC(PlN23RnLACpu7quB0QRlnA==)
     url: jdbc:mysql://localhost:3306/crap
     driver-class-name: com.mysql.cj.jdbc.Driver
+  # * 允许循环引用
+  main:
+    allow-circular-references: true
 
 #mybatis-plus:
 #  mapper-locations: classpath*:/mapper/**/*.xml
@@ -56,12 +59,31 @@ mybatis-plus:
 
 crap:
   id: ${hostname:localhost}                       # 节点标识
+  cache-ttl: 600s                                 # 缓存时间
+  debug-user: false                               # 允许切换用户
 
   # * 挂载目录
   path:
     tmp: /tmp/crap/tmp                           # 临时目录
     log: /tmp/crap/log                           # 日志目录
     source: /tmp/crap/source                     # 源码目录, public 为 web 根目录, public/upload 为上传目录
+
+  # * 安全验证
+  security:
+    enable: true                                  # 是否开启
+    verify-enable: false                          # 是否开启验证码功能
+    cross-origin: "*"                             # ! 生产环境限定 允许跨域的 Host, 多个用逗号分隔
+    multi-session: true                           # ! 生产环境关闭 多客户端登录同一账号
+    dev-user: sys                                 # 开发者账号 $e0801$e9+PjBhhF823XuLiYZgajxJUMckW/Tq8AUkwAmFslGVMC74ALP3tJhWHu3yGsyXUPHW9qyTsldBNMHAhF56D9w==$L2v/Zwk7bVN+lJU0zLMol0OpsCU8Z1ZQQLT2EVSWH6w=
+    anonymous-urls:                               # 不需要登录的地址
+      - /open/**                                  # 开放接口
+    public-urls:                                  # 不需要授权的地址, 登录即可访问
+      - /crap/system/**                           # Crap 基础功能
+    jwt:                                          # Json Web Token
+      secret: CRAP=JWT=SECRET=CRAP=JWT=SECRET=CRAP=JWT=SECRET=CRAP=JWT=SECRET                     # ! 生产环境替换 加密密钥
+      expire: 3600                                # 过期时间(s), 3600 = 1 小时
+      remember-me-expire: 2592000                 # 保持登录时间(s), 2592000 = 30 天
+      refresh: 600                                # db 刷新间隔(s), 600 = 10 分钟
 
 jasypt:
   encryptor:

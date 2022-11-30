@@ -12,7 +12,11 @@ import lombok.Getter;
 
 /**
  * ${table.comment!}
+ *
  * 实体扩展
+ *
+ * @author ${author}
+ * @since ${date}
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

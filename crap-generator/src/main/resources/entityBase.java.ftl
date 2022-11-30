@@ -36,7 +36,11 @@ import org.springframework.data.annotation.Id;
 
 /**
  * ${table.comment!}
+ *
  * 数据表实体, 与数据库保持同步, 不可修改
+ *
+ * @author ${author}
+ * @since ${date}
  */
 <#if entityLombokModel>
 @Data
@@ -55,7 +59,7 @@ public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}><
 <#elseif activeRecord>
 public class ${entity} extends Model<${entity}> {
 <#else>
-public class ${entity} implements Serializable,${baseEntity} {
+public class ${entity} implements Serializable, ${baseEntity} {
 </#if>
 
 <#if entitySerialVersionUID>
@@ -74,14 +78,14 @@ public class ${entity} implements Serializable,${baseEntity} {
         <#assign keyPropertyName="${field.propertyName}"/>
         <#assign keyPropertyType="${field.propertyType}"/>
     </#if>
-
     <#-- 检查是否有 JSON -->
     <#assign isJson = field.comment?starts_with("json")>
-
     <#-- 检查是否需要加密 -->
     <#assign isEncrypt = field.comment?starts_with("encrypt")>
-
     <#if field.comment!?length gt 0>
+    /**
+    * ${field.comment}
+    */
         <#if swagger2>
     @ApiModelProperty(value = "${field.comment}")
         <#else>
