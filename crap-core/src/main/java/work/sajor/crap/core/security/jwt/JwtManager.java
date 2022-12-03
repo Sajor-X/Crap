@@ -7,13 +7,13 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import work.sajor.crap.core.security.config.JwtConfig;
 import work.sajor.crap.core.security.config.SecurityConfig;
 import work.sajor.crap.core.security.facade.WebUserService;
 import work.sajor.crap.core.web.WebUtil;
 
-import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
@@ -87,6 +87,7 @@ public class JwtManager {
      * @param request
      * @return
      */
+    @Nullable
     public Long load(HttpServletRequest request) {
 
         String token = getToken(request);

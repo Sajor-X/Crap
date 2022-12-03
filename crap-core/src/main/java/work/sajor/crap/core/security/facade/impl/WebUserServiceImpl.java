@@ -22,10 +22,11 @@ import work.sajor.crap.core.web.WebException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>
- * 用户服务
+ * 实现 Spring Security 获取用户的方法
  * </p>
  *
  * @author Sajor
@@ -56,7 +57,7 @@ public class WebUserServiceImpl implements WebUserService {
         Wrapper<RbacUser> wrapper = userDao.getWrapper();
         wrapper.eq(RbacUser.Fields.username, username);
         RbacUser user = userDao.getOne(wrapper);
-        if (user == null || !user.getUsername().equals(username)) {
+        if (Objects.isNull(user) || !user.getUsername().equals(username)) {
             throw new UsernameNotFoundException("username : " + username + " not exists");
         }
         return BeanUtil.copyProperties(user, WebUser.class);
@@ -69,7 +70,7 @@ public class WebUserServiceImpl implements WebUserService {
     @Cacheable
     public WebUser get(Long id) {
         RbacUser user = userDao.getById(id);
-        if (user == null) {
+        if (Objects.isNull(user)) {
             throw new WebException("用户不存在");
         }
         if (user.getStatus().equals(0)) {

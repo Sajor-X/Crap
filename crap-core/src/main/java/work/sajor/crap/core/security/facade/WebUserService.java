@@ -6,7 +6,7 @@ import work.sajor.crap.core.security.dto.WebUser;
 
 /**
  * <p>
- * 用户服务
+ * 实现 Spring Security 获取用户的方法
  * </p>
  *
  * @author Sajor

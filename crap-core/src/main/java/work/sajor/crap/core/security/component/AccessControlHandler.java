@@ -57,6 +57,10 @@ public class AccessControlHandler {
      */
     @SuppressWarnings("ConstantConditions")
     public boolean check(Authentication authentication, HttpServletRequest request) {
+        if (!securityConfig.isRolePermissionEnable()) {
+            // 如果未开启角色权限功能，则直接放行
+            return true;
+        }
 
         Object principal = authentication.getPrincipal();
         if (principal instanceof String && principal.equals("anonymousUser")) { // 未登录

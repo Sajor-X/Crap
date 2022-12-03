@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * <p>
- * 系统用户
+ * 重写 Spring Security中 用户
  * </p>
  *
  * @author Sajor

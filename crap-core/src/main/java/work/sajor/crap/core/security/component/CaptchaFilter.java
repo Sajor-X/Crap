@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import work.sajor.crap.core.redis.RedisUtil;
 import work.sajor.crap.core.security.config.SecurityConfig;
@@ -63,15 +64,12 @@ public class CaptchaFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        // 没开验证码直接跳过
-        if (!securityConfig.isVerifyEnable()) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
         // 验证码 url
         if (request.getRequestURI().equals(request.getContextPath() + securityConfig.getCaptchaUrl()) && request.getMethod().equals("GET")) {
             printCaptcha(request, response);
+            return;
+        } else if (request.getRequestURI().equals(request.getContextPath() + securityConfig.getCaptchaUrl()) && request.getMethod().equals("POST")) {
+            jsonCaptcha(request, response);
             return;
         }
 
@@ -82,6 +80,20 @@ public class CaptchaFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private void jsonCaptcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // TODO : 外部获取图片尺寸, 限制宽高范围
+        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(Integer.parseInt(WebUtil.getQueryParam("width"))
+                , Integer.parseInt(WebUtil.getQueryParam("height")));
+        lineCaptcha.setGenerator(new RandomGenerator(charset, 4));
+        // 验证码有效期 10 分钟
+        String ticket = WebUtil.getQueryParam(requestTicketKey);
+        if (StrUtil.isNotEmpty(ticket)) {
+            RedisUtil.set(codeStoreKey + "" + ticket, lineCaptcha.getCode(), 600);
+            log.info("验证码 {}->{}", ticket, lineCaptcha.getCode());
+        }
+        WebUtil.sendJson(response, ResponseBuilder.success(lineCaptcha.getImageBase64Data()));
     }
 
     /**
@@ -132,7 +144,8 @@ public class CaptchaFilter extends OncePerRequestFilter {
         // 提交的值
         String requestCode = WebUtil.getQueryParam(requestCodeKey);
 
-        if (StrUtil.isEmpty(requestCode) || !requestCode.equalsIgnoreCase(sessionCode)) {
+        // 没开验证码直接跳过
+        if (securityConfig.isVerifyEnable() && (StrUtil.isEmpty(requestCode) || !requestCode.equalsIgnoreCase(sessionCode))) {
             WebUtil.sendJson(response, ResponseBuilder.error("验证码错误"));
         } else {
             filterChain.doFilter(request, response);

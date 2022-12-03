@@ -18,9 +18,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import work.sajor.crap.core.logger.OperationLogger;
 import work.sajor.crap.core.security.component.CaptchaFilter;
 import work.sajor.crap.core.security.component.CrossOriginFilter;
 import work.sajor.crap.core.security.dto.WebUser;
@@ -46,6 +44,7 @@ import java.io.IOException;
 @EnableWebSecurity
 @Configuration
 @Slf4j
+// TODO 过期类 待更新
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -99,14 +98,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 关闭 csrf
         http.csrf().disable();
 
-        // 表单登录
+        // 使用SpringSecurity自带的表单登录
         http.formLogin()
-                .loginPage(securityConfig.getLoginUrl())
-                .loginProcessingUrl(securityConfig.getLoginUrl())
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .successHandler(this::loginSuccess)
-                .failureHandler(this::loginFailure)
+                .loginPage(securityConfig.getLoginUrl())                        // 用户未登录时 自动跳转该路径
+                .loginProcessingUrl(securityConfig.getLoginUrl())               // 登陆表单form的action地址
+                .usernameParameter(securityConfig.getUsernameParameter())       // 用户名 登陆表单form中input的名 默认为username
+                .passwordParameter(securityConfig.getPasswordParameter())       // 密码 登陆表单form中input的名 默认为password
+                .successHandler(this::loginSuccess)                             // 成功回调
+                .failureHandler(this::loginFailure)                             // 失败回调
                 .permitAll(); // 使用自定义登录地址时允许所有访问, 防止 302 死循环
 
         // 关闭 http base 认证
@@ -169,7 +168,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(webUserService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(webUserService);// .passwordEncoder(passwordEncoder());
     }
 
     /**
@@ -190,16 +189,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new SCryptPasswordEncoder();
     }
 
-    @Bean
-    CorsConfigurationSource CorsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("*");    // 同源配置，*表示任何请求都视为同源，若需指定ip和端口可以改为如“localhost：8080”，多个以“，”分隔；
-        corsConfiguration.addAllowedHeader("*");    // header，允许哪些header，本案中使用的是token，此处可将*替换为token；
-        corsConfiguration.addAllowedMethod("*");    // 允许的请求方法，POST、GET等
-        source.registerCorsConfiguration("/**", corsConfiguration); // 配置允许跨域访问的url
-        return source;
-    }
+//    @Bean
+//    CorsConfigurationSource CorsConfigurationSource() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration corsConfiguration = new CorsConfiguration();
+//        corsConfiguration.addAllowedOrigin("*");    // 同源配置，*表示任何请求都视为同源，若需指定ip和端口可以改为如“localhost：8080”，多个以“，”分隔；
+//        corsConfiguration.addAllowedHeader("*");    // header，允许哪些header，本案中使用的是token，此处可将*替换为token；
+//        corsConfiguration.addAllowedMethod("*");    // 允许的请求方法，POST、GET等
+//        source.registerCorsConfiguration("/**", corsConfiguration); // 配置允许跨域访问的url
+//        return source;
+//    }
 
     // ****************************** Handler ******************************
 
@@ -212,7 +211,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         webUserService.reload(principal.getId());
 
         // --- 登录日志 ---
-//        OperationLogger.login();
+        OperationLogger.login();
 
         WebUtil.sendJson(response, ResponseBuilder.success(principal, "登录成功"));
     }
@@ -236,7 +235,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         Long userId = jwtManager.clear(request);
         if (userId != null) {
             // --- 登出日志 ---
-//            OperationLogger.logout(userId);
+            OperationLogger.logout(userId);
         }
     }
 

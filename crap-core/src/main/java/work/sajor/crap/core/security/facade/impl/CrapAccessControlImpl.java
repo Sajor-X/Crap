@@ -1,6 +1,7 @@
 package work.sajor.crap.core.security.facade.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import work.sajor.crap.core.dao.dao.RbacPrivilegeDao;
 import work.sajor.crap.core.dao.dao.RbacUserRoleDao;
@@ -21,9 +22,11 @@ import java.util.List;
 @Service
 public class CrapAccessControlImpl implements ProjectAccessControl {
 
+    @Lazy
     @Autowired
     RbacUserRoleDao rbacUserRoleDao;
 
+    @Lazy
     @Autowired
     private RbacPrivilegeDao rbacPrivilegeDao;
 

@@ -4,12 +4,9 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.*;
 import work.sajor.crap.core.mybatis.facade.FieldEnum;
 import work.sajor.crap.core.dao.entity.base.RbacUserBase;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -27,6 +27,21 @@ public class SecurityConfig {
     private boolean verifyEnable = true;
 
     /**
+     * 用户名字段名称
+     */
+    private String usernameParameter = "username";
+
+    /**
+     * 密码字段名称
+     */
+    private String passwordParameter = "password";
+
+    /**
+     * 是否开启角色权限功能
+     */
+    private boolean rolePermissionEnable = true;
+
+    /**
      * 允许跨域的 Host, 多个用逗号分隔
      */
     private String crossOrigin = "*";
