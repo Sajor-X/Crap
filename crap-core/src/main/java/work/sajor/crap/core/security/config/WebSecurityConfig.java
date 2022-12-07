@@ -1,5 +1,6 @@
 package work.sajor.crap.core.security.config;
 
+import cn.hutool.core.bean.BeanUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import work.sajor.crap.core.dao.dao.RbacUserDao;
 import work.sajor.crap.core.logger.OperationLogger;
 import work.sajor.crap.core.security.component.CaptchaFilter;
 import work.sajor.crap.core.security.component.CrossOriginFilter;
@@ -25,6 +27,7 @@ import work.sajor.crap.core.security.dto.WebUser;
 import work.sajor.crap.core.security.facade.WebUserService;
 import work.sajor.crap.core.security.jwt.JwtFilter;
 import work.sajor.crap.core.security.jwt.JwtManager;
+import work.sajor.crap.core.session.SessionUtil;
 import work.sajor.crap.core.web.WebUtil;
 import work.sajor.crap.core.web.dto.JsonResponse;
 import work.sajor.crap.core.web.response.ResponseBuilder;
@@ -61,6 +64,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private JwtFilter jwtFilter;
+
+    @Autowired
+    private RbacUserDao userDao;
 
     @Autowired
     private CrossOriginFilter crossOriginFilter;
@@ -211,6 +217,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         webUserService.reload(principal.getId());
 
         // --- 登录日志 ---
+        SessionUtil.setUser(principal);
         OperationLogger.login();
 
         WebUtil.sendJson(response, ResponseBuilder.success(principal, "登录成功"));
@@ -235,6 +242,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         Long userId = jwtManager.clear(request);
         if (userId != null) {
             // --- 登出日志 ---
+            SessionUtil.setUser(BeanUtil.copyProperties(userDao.getById(userId), WebUser.class));
             OperationLogger.logout(userId);
         }
     }

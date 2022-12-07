@@ -42,11 +42,11 @@ public class CrapGenerator {
 
     private static String password = "123456";
 
-    private static String baseMapper = "work.sajor.crap.core.mybatis.mapper.Mapper";
+    private static final String baseMapper = "work.sajor.crap.core.mybatis.mapper.Mapper";
 
-    private static String baseDao = "work.sajor.crap.core.mybatis.dao.BaseDao";
+    private static final String baseDao = "work.sajor.crap.core.mybatis.dao.BaseDao";
 
-    private static String baseEntity = "work.sajor.crap.core.mybatis.facade.Entity";
+    private static final String baseEntity = "work.sajor.crap.core.mybatis.facade.Entity";
 
     /**
      * 获取配置文件的配置
@@ -130,7 +130,12 @@ public class CrapGenerator {
      */
     protected List<TableFill> getTableFillList() {
         ArrayList<TableFill> tableFillList = new ArrayList<>();
+        tableFillList.add(new TableFill("tid", FieldFill.INSERT));
+        tableFillList.add(new TableFill("create_uid", FieldFill.INSERT));
+        tableFillList.add(new TableFill("create_uname", FieldFill.INSERT));
         tableFillList.add(new TableFill("create_time", FieldFill.INSERT));
+        tableFillList.add(new TableFill("update_uid", FieldFill.INSERT_UPDATE));
+        tableFillList.add(new TableFill("update_uname", FieldFill.INSERT_UPDATE));
         tableFillList.add(new TableFill("update_time", FieldFill.INSERT_UPDATE));
         return tableFillList;
     }

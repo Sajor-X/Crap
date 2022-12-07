@@ -66,6 +66,18 @@ public class SessionUtil {
     }
 
     /**
+     * 只在 登陆退出时使用
+     *
+     * @param user
+     */
+    public static void setUser(WebUser user) {
+        if (localSessionContext.get() == null) {
+            localSessionContext.set(new SessionContext());
+        }
+        localSessionContext.get().setUser(user);
+    }
+
+    /**
      * 获取当前用户
      */
     public static WebUser getUser() {

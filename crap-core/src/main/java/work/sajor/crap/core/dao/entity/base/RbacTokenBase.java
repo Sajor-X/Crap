@@ -1,39 +1,26 @@
 package work.sajor.crap.core.dao.entity.base;
 
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.Version;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
-import java.sql.Date;
+import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import work.sajor.crap.core.mybatis.support.TableCode;
-import work.sajor.crap.core.mybatis.handler.AESEncryptHandler;
-import work.sajor.crap.core.mybatis.facade.Entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * RBAC 登录令牌
- *
+ * <p>
  * 数据表实体, 与数据库保持同步, 不可修改
  *
  * @author Sajor
- * @since 2022-11-29
+ * @since 2022-12-04
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

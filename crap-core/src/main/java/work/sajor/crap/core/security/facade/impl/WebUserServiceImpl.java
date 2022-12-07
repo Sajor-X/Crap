@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import work.sajor.crap.core.dao.dao.RbacUserDao;
 import work.sajor.crap.core.dao.entity.RbacUser;
-import work.sajor.crap.core.dao.entity.base.RbacUserBase;
 import work.sajor.crap.core.mybatis.support.Wrapper;
 import work.sajor.crap.core.mybatis.util.QueryUtil;
 import work.sajor.crap.core.security.config.SecurityConfig;
@@ -108,7 +107,7 @@ public class WebUserServiceImpl implements WebUserService {
      */
     @Override
     public void updateUserLastOpTime(Long id) {
-        String updateSql = "UPDATE {} set {}='{}' WHERE id={}";
+        String updateSql = "UPDATE %s set %s='%s' WHERE id=%d";
         QueryUtil.execute(String.format(updateSql, RbacUser.Table, RbacUser.Fields.lastOpTime, LocalDateUtil.toString(true), id));
     }
 }

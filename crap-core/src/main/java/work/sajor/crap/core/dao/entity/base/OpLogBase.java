@@ -1,31 +1,18 @@
 package work.sajor.crap.core.dao.entity.base;
 
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.Version;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
-import java.sql.Date;
+import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import work.sajor.crap.core.mybatis.support.TableCode;
-import work.sajor.crap.core.mybatis.handler.AESEncryptHandler;
-import work.sajor.crap.core.mybatis.facade.Entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * 数据变更日志
@@ -138,7 +125,7 @@ public class OpLogBase implements Serializable, work.sajor.crap.core.mybatis.fac
     * System 创建人
     */
     @ApiModelProperty(value = "System 创建人")
-    @TableField("`create_uid`")
+    @TableField(value = "create_uid", fill = FieldFill.INSERT)
     @JsonProperty("create_uid")
     @JsonFormat(shape = Shape.STRING)
     protected Long createUid;
@@ -147,7 +134,7 @@ public class OpLogBase implements Serializable, work.sajor.crap.core.mybatis.fac
     * System 创建人
     */
     @ApiModelProperty(value = "System 创建人")
-    @TableField("`create_uname`")
+    @TableField(value = "create_uname", fill = FieldFill.INSERT)
     @JsonProperty("create_uname")
     protected String createUname;
 
@@ -164,7 +151,7 @@ public class OpLogBase implements Serializable, work.sajor.crap.core.mybatis.fac
     * System TID
     */
     @ApiModelProperty(value = "System TID")
-    @TableField("`tid`")
+    @TableField(value = "tid", fill = FieldFill.INSERT)
     @JsonProperty("tid")
     protected Integer tid;
 

@@ -3,7 +3,9 @@ package work.sajor.crap.core.logger;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-//import work.sajor.crap.core.dao.entity.OpLog;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import work.sajor.crap.core.logger.annotation.Oplog;
 import work.sajor.crap.core.logger.facade.OplogDaoProvider;
 import work.sajor.crap.core.logger.facade.OplogDaoProvider.OpLog;
@@ -13,13 +15,11 @@ import work.sajor.crap.core.security.dto.UriResource;
 import work.sajor.crap.core.security.util.UriUtil;
 import work.sajor.crap.core.web.WebUtil;
 import work.sajor.crap.core.web.dto.FormResponse;
+
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 
 /**
@@ -43,17 +43,17 @@ public class OperationLogger {
     /**
      * 用于替换 Oplog.title 模板的参数
      */
-    private static ThreadLocal<Map<String, String>> data = new ThreadLocal<>();
+    private static final ThreadLocal<Map<String, String>> data = new ThreadLocal<>();
 
-    private static String ID = "ID";
-    private static String CODE = "CODE";
-    private static String URL = "URL";
-    private static String TITLE = "TITLE";
-    private static String ACTION = "ACTION";
-    private static String TYPE = "TYPE";
-    private static String OP = "OP";
-    private static String RECORD = "RECORD";
-    private static String REMARK = "REMARK";
+    private static final String ID = "ID";
+    private static final String CODE = "CODE";
+    private static final String URL = "URL";
+    private static final String TITLE = "TITLE";
+    private static final String ACTION = "ACTION";
+    private static final String TYPE = "TYPE";
+    private static final String OP = "OP";
+    private static final String RECORD = "RECORD";
+    private static final String REMARK = "REMARK";
 
     // ------------------------------ autowire ------------------------------
     @Autowired
@@ -238,7 +238,8 @@ public class OperationLogger {
             try {
                 Long id = (Long) BeanUtil.getFieldValue(((FormResponse) response).getData(), "id");
                 data.putIfAbsent(ID, ObjectUtil.isNull(id) ? null : String.valueOf(id));
-            } catch (Exception ignore) {}
+            } catch (Exception ignore) {
+            }
         }
         if (StrUtil.isEmpty(data.get(ID)) && oplog.id()) {
             log.error("OP LOG : 没有提供 ID");
@@ -250,7 +251,8 @@ public class OperationLogger {
             try {
                 String code = (String) BeanUtil.getFieldValue(((FormResponse) response).getData(), "code");
                 data.putIfAbsent(CODE, code);
-            } catch (Exception ignore) {}
+            } catch (Exception ignore) {
+            }
         }
         if (StrUtil.isEmpty(data.get(CODE)) && oplog.code()) {
             log.error("OP LOG : 没有提供 CODE");

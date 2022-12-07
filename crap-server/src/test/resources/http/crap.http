@@ -41,13 +41,28 @@ Content-Type: application/x-www-form-urlencoded; charset=UTF-8
 username=sys&password=sys&ticket=1&verify={code}
 
 > {%
-  client.global.set("auth_token", JSON.parse(response.body).data.token);
-  client.log(JSON.parse(response.body).data.token);
+    client.global.set("auth_token", JSON.parse(response.body).data.token);
+    client.log(JSON.parse(response.body).data.token);
 %}
 
-
-### test
-GET {{host}}/a/view
+### 用户注销
+POST {{host}}/crap/auth/logout
 Authorization: Bearer {{auth_token}}
 
 
+### test
+GET {{host}}/test/hello
+Authorization: Bearer {{auth_token}}
+
+
+### test
+POST {{host}}/test/add
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "data": {
+    "name": "hell",
+    "mobile": "123"
+  }
+}
