@@ -1,10 +1,7 @@
 package work.sajor.crap.server;
 
 import lombok.extern.slf4j.Slf4j;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -27,9 +24,10 @@ public class CrapApplication {
 		String path = environment.getProperty("server.servlet.context-path");
 
 		log.info("\n----------------------------------------------------------\n\t" +
-				"Application is running! Access URLs:\n\t" +
+				"Application Crap is running! Access URLs:\n\t" +
 				"Local: \t\thttp://localhost:" + port + path + "/\n\t" +
 				"External: \thttp://" + ip + ":" + port + path + "/\n" +
+//				"Swagger文档: \thttp://" + ip + ":" + port + path + "/doc.html\n" +
 				"----------------------------------------------------------");
 	}
 

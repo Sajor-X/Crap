@@ -1,3 +1,4 @@
+${AnsiColor.BLUE} ${AnsiStyle.BOLD}
  ________      ________      ________      ________
 |\   ____\    |\   __  \    |\   __  \    |\   __  \
 \ \  \___|    \ \  \|\  \   \ \  \|\  \   \ \  \|\  \
@@ -5,3 +6,7 @@
   \ \  \____    \ \  \\  \|   \ \  \ \  \   \ \  \___|
    \ \_______\   \ \__\\ _\    \ \__\ \__\   \ \__\
     \|_______|    \|__|\|__|    \|__|\|__|    \|__|
+${AnsiColor.BRIGHT_GREEN}
+Crap Version: 0.0.1
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}
+${AnsiColor.DEFAULT} ${AnsiStyle.NORMAL}

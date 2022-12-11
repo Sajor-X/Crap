@@ -1,0 +1,8 @@
+# 存放真实密码 将文件名后的-bak后缀去掉(开源时使用，不开源则直接修改yml文件)
+spring.datasource.username=ENC(uUVVLhshTArj/Gd/AjpCIg==)
+spring.datasource.password=ENC(PlN23RnLACpu7quB0QRlnA==)
+spring.datasource.url=jdbc:mysql://192.168.52.154:3306/crap
+
+jasypt.encryptor.password=${ENCRYPTOR_PASSWORD:b1ncjbS<AYq'/iH}
+
+

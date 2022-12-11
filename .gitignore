@@ -180,3 +180,7 @@ Temporary Items
 
 # JRebel
 /**/rebel*.xml
+
+
+# crap settings (防止密码等配置被误开源)
+/**/application-*.properties
