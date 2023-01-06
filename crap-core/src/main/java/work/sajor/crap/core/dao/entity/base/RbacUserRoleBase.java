@@ -21,7 +21,7 @@ import java.io.Serializable;
  * 数据表实体, 与数据库保持同步, 不可修改
  *
  * @author Sajor
- * @since 2022-12-04
+ * @since 2023-01-07
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

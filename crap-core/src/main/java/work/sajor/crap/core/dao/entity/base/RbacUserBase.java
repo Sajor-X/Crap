@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
+import work.sajor.crap.core.mybatis.handler.AESEncryptHandler;
 import work.sajor.crap.core.mybatis.support.TableCode;
 
 import java.io.Serializable;
@@ -22,7 +23,7 @@ import java.time.LocalDateTime;
  * 数据表实体, 与数据库保持同步, 不可修改
  *
  * @author Sajor
- * @since 2022-12-04
+ * @since 2023-01-07
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -68,18 +69,18 @@ public class RbacUserBase implements Serializable, work.sajor.crap.core.mybatis.
     protected String password;
 
     /**
-    * 姓名
-    */
-    @ApiModelProperty(value = "姓名")
-    @TableField("`name`")
+     * encrypt(姓名)
+     */
+    @ApiModelProperty(value = "encrypt(姓名)")
+    @TableField(value = "`name`", typeHandler = AESEncryptHandler.class)
     @JsonProperty("name")
     protected String name;
 
     /**
-    * 手机号码
-    */
-    @ApiModelProperty(value = "手机号码")
-    @TableField("`mobile`")
+     * encrypt(手机号码)
+     */
+    @ApiModelProperty(value = "encrypt(手机号码)")
+    @TableField(value = "`mobile`", typeHandler = AESEncryptHandler.class)
     @JsonProperty("mobile")
     protected String mobile;
 

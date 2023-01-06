@@ -17,10 +17,10 @@ import work.sajor.crap.core.mybatis.handler.AESEncryptHandler;
 import ${baseEntity};
 <#list table.fields as field>
     <#if field.comment?starts_with("enum") && !field.comment?starts_with("enum(")>
-import ${package.Controller}.${table.controllerName}.${field.propertyName?cap_first}Enum;
+        import ${package.ServiceImpl}.${table.serviceImplName}.${field.propertyName?cap_first}Enum;
     </#if>
     <#if field.comment?starts_with("json") && !field.comment?starts_with("json(")>
-import ${package.Controller}.${table.controllerName}.${field.propertyName?cap_first}Bean;
+        import ${package.ServiceImpl}.${table.serviceImplName}.${field.propertyName?cap_first}Bean;
     </#if>
 </#list>
 <#if swagger2>

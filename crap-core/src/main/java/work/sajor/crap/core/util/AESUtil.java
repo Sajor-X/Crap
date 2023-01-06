@@ -1,7 +1,6 @@
 package work.sajor.crap.core.util;
 
 import lombok.extern.slf4j.Slf4j;
-import work.sajor.crap.core.config.ApplicationConfig;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -18,8 +17,8 @@ public class AESUtil {
 
 
 
-    private static String DEFAULT_CIPHER_ALGORITHM = "SHA1PRNG";
-    private static String KEY_ALGORITHM = "AES";
+    private static final String DEFAULT_CIPHER_ALGORITHM = "SHA1PRNG";
+    private static final String KEY_ALGORITHM = "AES";
 
     /**
      * 加密
@@ -64,7 +63,8 @@ public class AESUtil {
      */
     private static KeyGenerator getKeyGenerator() {
 
-        String key = ApplicationConfig.get().getDatasourceKey();
+//        String key = ApplicationConfig.get().getDatasourceKey();
+        String key = "b1ncjbS<AYq'/iH";
 
         KeyGenerator keygen = null;
         try {
@@ -99,15 +99,16 @@ public class AESUtil {
         } catch (Exception e) {
             log.warn("content decrypt error {}", e.getMessage());
         }
+        // 解密失败返回空
         return null;
     }
 
     public static void main(String[] args) {
-        String message = "root";
-        String ciphertext = "2a6k8O74z1e2SBfKw3DfDQ==";
-//        String ciphertext = encrypt(message);
+        String message = "川芎";
+//        String ciphertext = "2a6k8O74z1e2SBfKw3DfDQ==";
+        String ciphertext = encrypt(message);
 
-        System.out.println("加密后密文为: " + ciphertext);
+        System.out.println("加密后密文为:" + ciphertext);
         System.out.println("解密后明文为:" + decrypt(ciphertext));
     }
 

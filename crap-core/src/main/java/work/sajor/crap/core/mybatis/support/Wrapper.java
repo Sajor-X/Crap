@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 import work.sajor.crap.core.mybatis.facade.Entity;
 import work.sajor.crap.core.mybatis.facade.FieldEnum;
+import work.sajor.crap.core.mybatis.util.EntityInfoUtil;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -60,13 +61,14 @@ public class Wrapper<T> extends QueryWrapper<T> {
      * copy form super
      */
     private Wrapper(T entity, Class<T> entityClass, AtomicInteger paramNameSeq,
-                    Map<String, Object> paramNameValuePairs, MergeSegments mergeSegments,
+                    Map<String, Object> paramNameValuePairs, MergeSegments mergeSegments, SharedString paramAlias,
                     SharedString lastSql, SharedString sqlComment, SharedString sqlFirst) {
         super.setEntity(entity);
         super.setEntityClass(entityClass);
         this.paramNameSeq = paramNameSeq;
         this.paramNameValuePairs = paramNameValuePairs;
         this.expression = mergeSegments;
+        this.paramAlias = paramAlias;
         this.lastSql = lastSql;
         this.sqlComment = sqlComment;
         this.sqlFirst = sqlFirst;
@@ -78,7 +80,7 @@ public class Wrapper<T> extends QueryWrapper<T> {
     @Override
     protected Wrapper<T> instance() {
         return new Wrapper<>(getEntity(), getEntityClass(), paramNameSeq, paramNameValuePairs, new MergeSegments(),
-                SharedString.emptyString(), SharedString.emptyString(), SharedString.emptyString());
+                paramAlias, SharedString.emptyString(), SharedString.emptyString(), SharedString.emptyString());
     }
 
     // ------------------------------ methods ------------------------------
@@ -87,8 +89,7 @@ public class Wrapper<T> extends QueryWrapper<T> {
      * 添加查询条件
      */
     public Wrapper<T> addCondition(String column, SqlKeyword sqlKeyword, Object val) {
-
-        return (Wrapper<T>) super.addCondition(true, columnToString(column), sqlKeyword, val);
+        return (Wrapper<T>) super.addCondition(true, columnToString(column), sqlKeyword, formatSqlMaybeWithParam("{0}", null, val));
 //        return (Wrapper<T>) super.doIt(true, () -> columnToString(column), sqlKeyword, () -> formatSql("{0}", val));
     }
 
@@ -114,23 +115,24 @@ public class Wrapper<T> extends QueryWrapper<T> {
     /**
      * eq 支持枚举类型
      */
-//    public Wrapper<T> eq(String column, FieldEnum val) {
+    public Wrapper<T> eq(String column, FieldEnum val) {
+        return (Wrapper<T>) super.addCondition(true, columnToString(column), SqlKeyword.EQ, formatSqlMaybeWithParam("{0}", null, val.getValue()));
 //        return (Wrapper<T>) doIt(true, () -> columnToString(column), SqlKeyword.EQ, () -> formatSql("{0}", val.getValue()));
-//    }
+    }
 
     // ------------------------------ join ------------------------------
 
     /**
      * 将一个实体类的所有字段添加到查询 : table.id AS 'table.id'
      */
-//    public void addEntityFields(Class<? extends Entity> entityClass) {
-//        if (fields == null) {
-//            fields = new HashMap<>();
-//        }
-//
-//        EntityInfo<? extends Entity> info = EntityInfoUtil.getInfo(entityClass);
-//        fields.putAll(info.getAliasMap());
-//    }
+    public void addEntityFields(Class<? extends Entity> entityClass) {
+        if (fields == null) {
+            fields = new HashMap<>();
+        }
+
+        EntityInfo<? extends Entity> info = EntityInfoUtil.getInfo(entityClass);
+        fields.putAll(info.getAliasMap());
+    }
 
     /**
      * 根据 @TableField 设置查询字段 : annotationValue AS 'propertyName'

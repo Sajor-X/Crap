@@ -68,8 +68,8 @@ public class CrapGenerator {
     }
 
     public static void main(String[] args) {
-        new CrapGenerator().run();
-//        new CrapGenerator().securityRun();
+//        new CrapGenerator().run();
+        new CrapGenerator().securityRun();
 //        new CrapGenerator().logRun();
     }
 

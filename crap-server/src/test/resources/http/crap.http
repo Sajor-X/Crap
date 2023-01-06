@@ -1,5 +1,5 @@
 POST {{host}}/t/list
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJod29uYnRyaW90Iiwic3ViIjoiMSIsImlhdCI6MTY2OTgwOTU2OCwiZXhwIjoxOTMyNjM4MzY4fQ.gkpr0RLffK1Ea438jOOC1qHyxNt5g8ceR5F8qHhL0RM
+Authorization: Bearer {{auth_token}}
 Content-Type: application/json;charset=UTF-8
 User-Agent: {{agent}}
 
@@ -65,4 +65,22 @@ Content-Type: application/json
     "name": "hell",
     "mobile": "123"
   }
+}
+
+### user list
+POST {{host}}/user/list
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer {{auth_token}}
+
+{
+  "pageNo": 1,
+  "pageSize": 2,
+  "prefix": "",
+  "sort": [
+    {
+      "key": "code",
+      "order": "DESC"
+    }
+  ],
+  "where": []
 }

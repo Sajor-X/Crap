@@ -2,9 +2,14 @@ package work.sajor.crap.core.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import work.sajor.crap.core.annotation.PrivacyEncrypt;
 import work.sajor.crap.core.dao.entity.base.RbacUserBase;
+import work.sajor.crap.core.json.PrivacyTypeEnum;
+import work.sajor.crap.core.mybatis.handler.AESEncryptHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +35,17 @@ public class RbacUser extends RbacUserBase {
     @TableField("`password`")
 //    @JsonIgnore
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @PrivacyEncrypt(type = PrivacyTypeEnum.SECRET)
     protected String password;
+
+    /**
+     * 手机号码
+     */
+    @PrivacyEncrypt(type = PrivacyTypeEnum.MOBILE)
+    @ApiModelProperty(value = "encrypt(手机号码)")
+    @TableField(value = "`mobile`", typeHandler = AESEncryptHandler.class)
+    @JsonProperty("mobile")
+    protected String mobile;
 
     public List<Long> getRoleIds() {
         return roleIds == null ? new ArrayList<>() : roleIds;
