@@ -48,6 +48,8 @@ public class CrapGenerator {
 
     private static final String baseEntity = "work.sajor.crap.core.mybatis.facade.Entity";
 
+    private static final String baseController = "work.sajor.crap.core.web.WebController";
+
     /**
      * 获取配置文件的配置
      */
@@ -66,9 +68,9 @@ public class CrapGenerator {
     }
 
     public static void main(String[] args) {
-//        new CrapGenerator().run();
+        new CrapGenerator().run();
 //        new CrapGenerator().securityRun();
-        new CrapGenerator().logRun();
+//        new CrapGenerator().logRun();
     }
 
     public void logRun() {
@@ -87,11 +89,11 @@ public class CrapGenerator {
         generate(
                 "work.sajor.crap.core.dao",
                 "/crap-core",
-                "crap_",
+                "crap_test_config",
                 "crap_",
                 new String[]{},
                 new String[]{},
-                false
+                true
         );
     }
 
@@ -186,8 +188,8 @@ public class CrapGenerator {
         globalConfig.setBaseColumnList(false);
         globalConfig.setEntityName("%sBase");
         globalConfig.setServiceName("%sDao");
-        globalConfig.setServiceImplName("%sEnum");
-        globalConfig.setControllerName("%s");
+        globalConfig.setServiceImplName("%s");
+        globalConfig.setControllerName("%sController");
         globalConfig.setIdType(IdType.ASSIGN_ID);
         generator.setGlobalConfig(globalConfig);
 
@@ -204,7 +206,7 @@ public class CrapGenerator {
         packageConfig.setParent(packageName);
         packageConfig.setService("dao");
         packageConfig.setEntity("entity.base");
-        packageConfig.setController("entity");
+        packageConfig.setController("controller");
         packageConfig.setServiceImpl("entity");
         generator.setPackageInfo(packageConfig);
 
@@ -215,10 +217,6 @@ public class CrapGenerator {
         };
 
         injectionConfig.setFileCreate((configBuilder, fileType, filePath) -> {
-
-            if (fileType == FileType.SERVICE_IMPL) {
-                return false;
-            }
 
             // entity.base.* 对应数据表, 不应该直接修改, 因此强制覆写 entity.base
             if (fileType == FileType.ENTITY) {
@@ -243,7 +241,8 @@ public class CrapGenerator {
         //指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
         templateConfig.setEntity("entityBase.java");
         templateConfig.setService("dao.java");
-        templateConfig.setController("entity.java");
+        templateConfig.setServiceImpl("entity.java");
+        templateConfig.setController("controller.java");
         templateConfig.setMapper("mapper.java");
         generator.setTemplate(templateConfig);
 
@@ -268,6 +267,7 @@ public class CrapGenerator {
         strategy.setVersionFieldName("sys_version");
         strategy.setSuperMapperClass(baseMapper);
         strategy.setSuperServiceClass(getBaseDao());
+        strategy.setSuperControllerClass(baseController);
         strategy.setTableFillList(getTableFillList());                          // 自动填充
         generator.setStrategy(strategy);
 

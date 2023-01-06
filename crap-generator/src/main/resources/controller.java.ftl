@@ -1,23 +1,32 @@
-package ${package.Service};
+package ${package.Controller};
 
-import ${superServiceClassPackage};
-import ${package.Controller}.${table.controllerName};
-import ${package.Mapper}.${table.controllerName}Mapper;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.stereotype.Repository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+import ${package.Service}.${table.serviceName};
+import ${package.Entity}.${table.entityName};
+
+<#if superControllerClassPackage??>
+    import ${superControllerClassPackage};
+</#if>
 
 /**
- * ${table.comment!} Dao
- *
- * @author ${author}
- * @since ${date}
- */
+* ${table.comment!} controller
+*
+* @author ${author}
+* @since ${date}
+*/
+@RestController
+@Slf4j
+@RequestMapping("<#if package.ModuleName??>${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.serviceImplName}</#if>")
 <#if kotlin>
-interface ${table.serviceName} : ${superServiceClass}<${entity}>
+    class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
 <#else>
-@Repository
-@CacheConfig(cacheNames = "${table.controllerName}", keyGenerator = "cacheKeyGenerator")
-public class ${table.serviceName} extends ${superServiceClass}<${table.controllerName}Mapper, ${table.controllerName}> {
+    <#if superControllerClass??>
+        public class ${table.controllerName} extends ${superControllerClass}<${table.serviceName}> {
+    <#else>
+        public class ${table.controllerName} {
+    </#if>
 
-}
+
+    }
 </#if>

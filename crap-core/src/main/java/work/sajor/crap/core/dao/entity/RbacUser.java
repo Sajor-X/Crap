@@ -2,10 +2,8 @@ package work.sajor.crap.core.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.*;
-import work.sajor.crap.core.mybatis.facade.FieldEnum;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import work.sajor.crap.core.dao.entity.base.RbacUserBase;
 
 import java.util.ArrayList;
@@ -30,7 +28,8 @@ public class RbacUser extends RbacUserBase {
      * 密码
      */
     @TableField("`password`")
-    @JsonIgnore
+//    @JsonIgnore
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     protected String password;
 
     public List<Long> getRoleIds() {
