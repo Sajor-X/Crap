@@ -30,15 +30,6 @@ import java.util.List;
 public class RbacUser extends RbacUserBase {
 
     /**
-     * 密码
-     */
-    @TableField("`password`")
-//    @JsonIgnore
-//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @PrivacyEncrypt(type = PrivacyTypeEnum.SECRET)
-    protected String password;
-
-    /**
      * 手机号码
      */
     @PrivacyEncrypt(type = PrivacyTypeEnum.MOBILE)

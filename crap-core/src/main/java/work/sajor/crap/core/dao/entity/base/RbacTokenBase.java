@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
  * 数据表实体, 与数据库保持同步, 不可修改
  *
  * @author Sajor
- * @since 2023-01-07
+ * @since 2023-01-08
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -31,8 +31,8 @@ public class RbacTokenBase implements Serializable, work.sajor.crap.core.mybatis
     private static final long serialVersionUID = 1L;
 
     /**
-    * ID
-    */
+     * ID
+     */
     @ApiModelProperty(value = "ID")
     @Id
     @TableId(value = "id", type = IdType.ASSIGN_ID)
@@ -41,16 +41,16 @@ public class RbacTokenBase implements Serializable, work.sajor.crap.core.mybatis
     protected Long id;
 
     /**
-    * 渠道
-    */
+     * 渠道
+     */
     @ApiModelProperty(value = "渠道")
     @TableField("`type`")
     @JsonProperty("type")
     protected String type;
 
     /**
-    * 用户 ID
-    */
+     * 用户 ID
+     */
     @ApiModelProperty(value = "用户 ID")
     @TableField("`user_id`")
     @JsonProperty("user_id")
@@ -58,24 +58,24 @@ public class RbacTokenBase implements Serializable, work.sajor.crap.core.mybatis
     protected Long userId;
 
     /**
-    * jwt
-    */
+     * jwt
+     */
     @ApiModelProperty(value = "jwt")
     @TableField("`token`")
     @JsonProperty("token")
     protected String token;
 
     /**
-    * jwt 有效期(s)
-    */
+     * jwt 有效期(s)
+     */
     @ApiModelProperty(value = "jwt 有效期(s)")
     @TableField("`token_ttl`")
     @JsonProperty("token_ttl")
     protected Integer tokenTtl;
 
     /**
-    * jwt  刷新时间
-    */
+     * jwt  刷新时间
+     */
     @ApiModelProperty(value = "jwt  刷新时间")
     @TableField("`token_time`")
     @JsonProperty("token_time")
@@ -83,8 +83,8 @@ public class RbacTokenBase implements Serializable, work.sajor.crap.core.mybatis
     protected LocalDateTime tokenTime;
 
     /**
-    * 最近操作时间
-    */
+     * 最近操作时间
+     */
     @ApiModelProperty(value = "最近操作时间")
     @TableField("`last_op_time`")
     @JsonProperty("last_op_time")
@@ -92,8 +92,8 @@ public class RbacTokenBase implements Serializable, work.sajor.crap.core.mybatis
     protected LocalDateTime lastOpTime;
 
     /**
-    * System 创建时间
-    */
+     * System 创建时间
+     */
     @ApiModelProperty(value = "System 创建时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     @JsonProperty("create_time")
@@ -101,8 +101,8 @@ public class RbacTokenBase implements Serializable, work.sajor.crap.core.mybatis
     protected LocalDateTime createTime;
 
     /**
-    * System 更新时间
-    */
+     * System 更新时间
+     */
     @ApiModelProperty(value = "System 更新时间")
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     @JsonProperty("update_time")

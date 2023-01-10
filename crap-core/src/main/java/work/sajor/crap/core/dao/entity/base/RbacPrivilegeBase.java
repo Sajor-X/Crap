@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
  * 数据表实体, 与数据库保持同步, 不可修改
  *
  * @author Sajor
- * @since 2023-01-07
+ * @since 2023-01-08
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -32,8 +32,8 @@ public class RbacPrivilegeBase implements Serializable, work.sajor.crap.core.myb
     private static final long serialVersionUID = 1L;
 
     /**
-    * ID
-    */
+     * ID
+     */
     @ApiModelProperty(value = "ID")
     @Id
     @TableId(value = "id", type = IdType.ASSIGN_ID)
@@ -42,8 +42,8 @@ public class RbacPrivilegeBase implements Serializable, work.sajor.crap.core.myb
     protected Long id;
 
     /**
-    * PID
-    */
+     * PID
+     */
     @ApiModelProperty(value = "PID")
     @TableField("`pid`")
     @JsonProperty("pid")
@@ -51,24 +51,24 @@ public class RbacPrivilegeBase implements Serializable, work.sajor.crap.core.myb
     protected Long pid;
 
     /**
-    * 标题
-    */
+     * 标题
+     */
     @ApiModelProperty(value = "标题")
     @TableField("`name`")
     @JsonProperty("name")
     protected String name;
 
     /**
-    * 资源标识 uri / code ...
-    */
+     * 资源标识 uri / code ...
+     */
     @ApiModelProperty(value = "资源标识 uri / code ...")
     @TableField("`resource`")
     @JsonProperty("resource")
     protected String resource;
 
     /**
-    * 编码
-    */
+     * 编码
+     */
     @ApiModelProperty(value = "编码")
     @TableField("`code`")
     @TableCode()
@@ -76,40 +76,40 @@ public class RbacPrivilegeBase implements Serializable, work.sajor.crap.core.myb
     protected String code;
 
     /**
-    * 项目
-    */
+     * 项目
+     */
     @ApiModelProperty(value = "项目")
     @TableField("`project`")
     @JsonProperty("project")
     protected String project;
 
     /**
-    * 排序权重, 降序
-    */
+     * 排序权重, 降序
+     */
     @ApiModelProperty(value = "排序权重, 降序")
     @TableField("`sort`")
     @JsonProperty("sort")
     protected Integer sort;
 
     /**
-    * 0:禁用, 1:启用
-    */
+     * 0:禁用, 1:启用
+     */
     @ApiModelProperty(value = "0:禁用, 1:启用")
     @TableField("`status`")
     @JsonProperty("status")
     protected Integer status;
 
     /**
-    * 图标
-    */
+     * 图标
+     */
     @ApiModelProperty(value = "图标")
     @TableField("`icon`")
     @JsonProperty("icon")
     protected String icon;
 
     /**
-    * 是否显示
-    */
+     * 是否显示
+     */
     @ApiModelProperty(value = "是否显示")
     @TableField("`show_flag`")
     @JsonProperty("show_flag")
@@ -117,56 +117,56 @@ public class RbacPrivilegeBase implements Serializable, work.sajor.crap.core.myb
     protected Boolean showFlag;
 
     /**
-    * 1: 授权访问; 2: 完全公开; 3: 仅用于开发者账号
-    */
+     * 1: 授权访问; 2: 完全公开; 3: 仅用于开发者账号
+     */
     @ApiModelProperty(value = "1: 授权访问; 2: 完全公开; 3: 仅用于开发者账号")
     @TableField("`type`")
     @JsonProperty("type")
     protected Integer type;
 
     /**
-    * sql 模板 : SELECT * FROM table WHERE user_id={['webUser'].id}
-    */
+     * sql 模板 : SELECT * FROM table WHERE user_id={['webUser'].id}
+     */
     @ApiModelProperty(value = "sql 模板 : SELECT * FROM table WHERE user_id={['webUser'].id}")
     @TableField("`sql`")
     @JsonProperty("sql")
     protected String sql;
 
     /**
-    * 前端模板 : @/views*
-    */
+     * 前端模板 : @/views*
+     */
     @ApiModelProperty(value = "前端模板 : @/views*")
     @TableField("`tpl`")
     @JsonProperty("tpl")
     protected String tpl;
 
     /**
-    * 系统标识
-    */
+     * 系统标识
+     */
     @ApiModelProperty(value = "系统标识")
     @TableField("`scope`")
     @JsonProperty("scope")
     protected String scope;
 
     /**
-    * 备注
-    */
+     * 备注
+     */
     @ApiModelProperty(value = "备注")
     @TableField("`remark`")
     @JsonProperty("remark")
     protected String remark;
 
     /**
-    * System TID
-    */
+     * System TID
+     */
     @ApiModelProperty(value = "System TID")
     @TableField(value = "tid", fill = FieldFill.INSERT)
     @JsonProperty("tid")
     protected Integer tid;
 
     /**
-    * System 创建人
-    */
+     * System 创建人
+     */
     @ApiModelProperty(value = "System 创建人")
     @TableField(value = "create_uid", fill = FieldFill.INSERT)
     @JsonProperty("create_uid")
@@ -174,16 +174,16 @@ public class RbacPrivilegeBase implements Serializable, work.sajor.crap.core.myb
     protected Long createUid;
 
     /**
-    * System 创建人
-    */
+     * System 创建人
+     */
     @ApiModelProperty(value = "System 创建人")
     @TableField(value = "create_uname", fill = FieldFill.INSERT)
     @JsonProperty("create_uname")
     protected String createUname;
 
     /**
-    * System 创建时间
-    */
+     * System 创建时间
+     */
     @ApiModelProperty(value = "System 创建时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     @JsonProperty("create_time")
@@ -191,8 +191,8 @@ public class RbacPrivilegeBase implements Serializable, work.sajor.crap.core.myb
     protected LocalDateTime createTime;
 
     /**
-    * System 更新人
-    */
+     * System 更新人
+     */
     @ApiModelProperty(value = "System 更新人")
     @TableField(value = "update_uid", fill = FieldFill.INSERT_UPDATE)
     @JsonProperty("update_uid")
@@ -200,16 +200,16 @@ public class RbacPrivilegeBase implements Serializable, work.sajor.crap.core.myb
     protected Long updateUid;
 
     /**
-    * System 更新人
-    */
+     * System 更新人
+     */
     @ApiModelProperty(value = "System 更新人")
     @TableField(value = "update_uname", fill = FieldFill.INSERT_UPDATE)
     @JsonProperty("update_uname")
     protected String updateUname;
 
     /**
-    * System 更新时间
-    */
+     * System 更新时间
+     */
     @ApiModelProperty(value = "System 更新时间")
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     @JsonProperty("update_time")

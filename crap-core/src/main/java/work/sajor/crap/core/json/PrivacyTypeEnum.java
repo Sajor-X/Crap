@@ -38,7 +38,7 @@ public enum PrivacyTypeEnum {
     EMAIL,
 
     /**
-     * 秘密
+     * 全部脱敏
      */
     SECRET,
 }

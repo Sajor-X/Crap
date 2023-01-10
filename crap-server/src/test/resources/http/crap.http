@@ -84,3 +84,34 @@ Authorization: Bearer {{auth_token}}
   ],
   "where": []
 }
+
+### test add
+POST {{host}}/Test/add
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "data": {
+    "name": "hell3",
+    "mobile": "1233",
+    "sex": 0
+  }
+}
+
+### test list
+POST {{host}}/Test/list
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer {{auth_token}}
+
+{
+  "pageNo": 1,
+  "pageSize": 2,
+  "prefix": "",
+  "sort": [
+    {
+      "key": "code",
+      "order": "DESC"
+    }
+  ],
+  "where": []
+}

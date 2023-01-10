@@ -1,6 +1,7 @@
 package work.sajor.crap.core.util;
 
 import lombok.extern.slf4j.Slf4j;
+import work.sajor.crap.core.config.ApplicationConfig;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -14,7 +15,6 @@ import java.util.Base64;
 
 @Slf4j
 public class AESUtil {
-
 
 
     private static final String DEFAULT_CIPHER_ALGORITHM = "SHA1PRNG";
@@ -63,8 +63,7 @@ public class AESUtil {
      */
     private static KeyGenerator getKeyGenerator() {
 
-//        String key = ApplicationConfig.get().getDatasourceKey();
-        String key = "b1ncjbS<AYq'/iH";
+        String key = ApplicationConfig.get().getDatasourceKey();
 
         KeyGenerator keygen = null;
         try {

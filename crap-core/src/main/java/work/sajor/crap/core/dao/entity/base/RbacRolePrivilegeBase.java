@@ -22,7 +22,7 @@ import java.io.Serializable;
  * 数据表实体, 与数据库保持同步, 不可修改
  *
  * @author Sajor
- * @since 2023-01-07
+ * @since 2023-01-08
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -33,8 +33,8 @@ public class RbacRolePrivilegeBase implements Serializable, work.sajor.crap.core
     private static final long serialVersionUID = 1L;
 
     /**
-    * ID
-    */
+     * ID
+     */
     @ApiModelProperty(value = "ID")
     @Id
     @TableId(value = "id", type = IdType.AUTO)
@@ -43,8 +43,8 @@ public class RbacRolePrivilegeBase implements Serializable, work.sajor.crap.core
     protected Long id;
 
     /**
-    * 角色 ID
-    */
+     * 角色 ID
+     */
     @ApiModelProperty(value = "角色 ID")
     @TableField("`role_id`")
     @JsonProperty("role_id")
@@ -52,8 +52,8 @@ public class RbacRolePrivilegeBase implements Serializable, work.sajor.crap.core
     protected Long roleId;
 
     /**
-    * 权限 ID
-    */
+     * 权限 ID
+     */
     @ApiModelProperty(value = "权限 ID")
     @TableField("`privilege_id`")
     @JsonProperty("privilege_id")

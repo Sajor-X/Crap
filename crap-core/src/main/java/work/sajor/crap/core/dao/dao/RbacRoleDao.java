@@ -31,7 +31,7 @@ public class RbacRoleDao extends EventDao<RbacRoleMapper, RbacRole> {
         DictUtil.register("role", wrapper -> {
             wrapper = wrapper == null ? getWrapper() : wrapper;
             wrapper.orderByAsc(RbacRole.Fields.id);
-            wrapper.eq(RbacRole.Fields.status, 1);
+            wrapper.eq(RbacRole.Fields.status, RbacRole.StatusEnum.ON);
             return list(wrapper);
         });
     }

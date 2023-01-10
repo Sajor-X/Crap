@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,7 +24,7 @@ import java.time.LocalDateTime;
  * 数据表实体, 与数据库保持同步, 不可修改
  *
  * @author Sajor
- * @since 2023-01-07
+ * @since 2023-01-08
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -34,8 +35,8 @@ public class RbacUserBase implements Serializable, work.sajor.crap.core.mybatis.
     private static final long serialVersionUID = 1L;
 
     /**
-    * ID
-    */
+     * ID
+     */
     @ApiModelProperty(value = "ID")
     @Id
     @TableId(value = "id", type = IdType.ASSIGN_ID)
@@ -44,8 +45,8 @@ public class RbacUserBase implements Serializable, work.sajor.crap.core.mybatis.
     protected Long id;
 
     /**
-    * code(U). 编码
-    */
+     * code(U). 编码
+     */
     @ApiModelProperty(value = "code(U). 编码")
     @TableField("`code`")
     @TableCode("U")
@@ -53,19 +54,19 @@ public class RbacUserBase implements Serializable, work.sajor.crap.core.mybatis.
     protected String code;
 
     /**
-    * 账号
-    */
+     * 账号
+     */
     @ApiModelProperty(value = "账号")
     @TableField("`username`")
     @JsonProperty("username")
     protected String username;
 
     /**
-    * 密码
-    */
-    @ApiModelProperty(value = "密码")
+     * no_prop(密码)
+     */
+    @ApiModelProperty(value = "no_prop(密码)")
     @TableField("`password`")
-    @JsonProperty("password")
+    @JsonIgnore
     protected String password;
 
     /**
@@ -85,40 +86,40 @@ public class RbacUserBase implements Serializable, work.sajor.crap.core.mybatis.
     protected String mobile;
 
     /**
-    * bool 是否有效
-    */
+     * bool 是否有效
+     */
     @ApiModelProperty(value = "bool 是否有效")
     @TableField("`status`")
     @JsonProperty("status")
     protected Integer status;
 
     /**
-    * json(java.util.List<Long>) 角色 ID 列表
-    */
+     * json(java.util.List<Long>) 角色 ID 列表
+     */
     @ApiModelProperty(value = "json(java.util.List<Long>) 角色 ID 列表")
     @TableField(value = "`role_ids`", typeHandler = JacksonTypeHandler.class)
     @JsonProperty("role_ids")
     protected java.util.List<Long> roleIds;
 
     /**
-    * json(java.util.List<Long>) 部门 ID 列表
-    */
+     * json(java.util.List<Long>) 部门 ID 列表
+     */
     @ApiModelProperty(value = "json(java.util.List<Long>) 部门 ID 列表")
     @TableField(value = "`department_ids`", typeHandler = JacksonTypeHandler.class)
     @JsonProperty("department_ids")
     protected java.util.List<Long> departmentIds;
 
     /**
-    * 0: 未锁定; 1: 已锁定;
-    */
+     * 0: 未锁定; 1: 已锁定;
+     */
     @ApiModelProperty(value = "0: 未锁定; 1: 已锁定;")
     @TableField("`lock_flag`")
     @JsonProperty("lock_flag")
     protected Integer lockFlag;
 
     /**
-    * 最近操作时间
-    */
+     * 最近操作时间
+     */
     @ApiModelProperty(value = "最近操作时间")
     @TableField("`last_op_time`")
     @JsonProperty("last_op_time")
@@ -126,8 +127,8 @@ public class RbacUserBase implements Serializable, work.sajor.crap.core.mybatis.
     protected LocalDateTime lastOpTime;
 
     /**
-    * 乐观锁版本号
-    */
+     * 乐观锁版本号
+     */
     @ApiModelProperty(value = "乐观锁版本号")
     @TableField("`sys_version`")
     @JsonProperty("sys_version")
@@ -135,8 +136,8 @@ public class RbacUserBase implements Serializable, work.sajor.crap.core.mybatis.
     protected Integer sysVersion;
 
     /**
-    * 逻辑删除
-    */
+     * 逻辑删除
+     */
     @ApiModelProperty(value = "逻辑删除")
     @TableField("crap_rbac_user.`delete_flag`")
     @JsonProperty("delete_flag")
@@ -145,8 +146,8 @@ public class RbacUserBase implements Serializable, work.sajor.crap.core.mybatis.
     protected LocalDateTime deleteFlag;
 
     /**
-    * System 创建人
-    */
+     * System 创建人
+     */
     @ApiModelProperty(value = "System 创建人")
     @TableField(value = "create_uid", fill = FieldFill.INSERT)
     @JsonProperty("create_uid")
@@ -154,16 +155,16 @@ public class RbacUserBase implements Serializable, work.sajor.crap.core.mybatis.
     protected Long createUid;
 
     /**
-    * System 创建人
-    */
+     * System 创建人
+     */
     @ApiModelProperty(value = "System 创建人")
     @TableField(value = "create_uname", fill = FieldFill.INSERT)
     @JsonProperty("create_uname")
     protected String createUname;
 
     /**
-    * System 创建时间
-    */
+     * System 创建时间
+     */
     @ApiModelProperty(value = "System 创建时间")
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     @JsonProperty("create_time")
@@ -171,8 +172,8 @@ public class RbacUserBase implements Serializable, work.sajor.crap.core.mybatis.
     protected LocalDateTime createTime;
 
     /**
-    * System 更新人
-    */
+     * System 更新人
+     */
     @ApiModelProperty(value = "System 更新人")
     @TableField(value = "update_uid", fill = FieldFill.INSERT_UPDATE)
     @JsonProperty("update_uid")
@@ -180,16 +181,16 @@ public class RbacUserBase implements Serializable, work.sajor.crap.core.mybatis.
     protected Long updateUid;
 
     /**
-    * System 更新人
-    */
+     * System 更新人
+     */
     @ApiModelProperty(value = "System 更新人")
     @TableField(value = "update_uname", fill = FieldFill.INSERT_UPDATE)
     @JsonProperty("update_uname")
     protected String updateUname;
 
     /**
-    * System 更新时间
-    */
+     * System 更新时间
+     */
     @ApiModelProperty(value = "System 更新时间")
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     @JsonProperty("update_time")
@@ -197,8 +198,8 @@ public class RbacUserBase implements Serializable, work.sajor.crap.core.mybatis.
     protected LocalDateTime updateTime;
 
     /**
-    * System TID
-    */
+     * System TID
+     */
     @ApiModelProperty(value = "System TID")
     @TableField(value = "tid", fill = FieldFill.INSERT)
     @JsonProperty("tid")

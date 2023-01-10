@@ -20,10 +20,10 @@ public class ApplicationConfig {
 
     private static ApplicationConfig self;
 
-//    @Autowired
-//    private void setApplicationConfig(ApplicationConfig applicationConfig) {
-//        self = applicationConfig;
-//    }
+    @Autowired
+    private void setApplicationConfig(ApplicationConfig applicationConfig) {
+        self = applicationConfig;
+    }
 
     /**
      * 应用节点标识
