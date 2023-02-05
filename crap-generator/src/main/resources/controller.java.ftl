@@ -17,7 +17,9 @@ import ${superControllerClassPackage};
  */
 @RestController
 @Slf4j
-@RequestMapping("<#if package.ModuleName??>${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.serviceImplName}</#if>")
+-- 需转移至Controller包中，不允许放在dao层
+-- url格式: /{route}/module/controller
+@RequestMapping("/{route}/<#if package.ModuleName?? && package.ModuleName != "">${package.ModuleName}<#else>${cfg.model}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.serviceImplName}</#if>")
 <#if kotlin>
 class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
 <#else>

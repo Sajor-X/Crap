@@ -15,10 +15,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import work.sajor.crap.generator.config.FreemarkerTemplateEngine;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * <p>
@@ -93,7 +90,8 @@ public class CrapGenerator {
                 "crap_",
                 new String[]{},
                 new String[]{},
-                true
+                true,
+                "test"
         );
     }
 
@@ -153,7 +151,7 @@ public class CrapGenerator {
 
 
     /**
-     * 生成
+     * 代码生成
      *
      * @param packageName 包名
      * @param packagePath 路径
@@ -164,6 +162,22 @@ public class CrapGenerator {
      * @param override    是否覆盖
      */
     public void generate(String packageName, String packagePath, String prefix, String trimPrefix, String[] tables, String[] excludes, boolean override) {
+        generate(packageName, packagePath, prefix, trimPrefix, tables, excludes, override, "xxx");
+    }
+
+    /**
+     * 代码生成
+     *
+     * @param packageName 包名
+     * @param packagePath 路径
+     * @param prefix      可通过前缀设定生成范围
+     * @param trimPrefix  清除前缀
+     * @param tables      包含的表, 与 prefix 指定的范围合并
+     * @param excludes    排除的表, 在 prefix 指定的范围中排除
+     * @param override    是否覆盖
+     * @param modelName   模块名称
+     */
+    public void generate(String packageName, String packagePath, String prefix, String trimPrefix, String[] tables, String[] excludes, boolean override, String modelName) {
 
         loadProperties();
 
@@ -215,6 +229,7 @@ public class CrapGenerator {
             public void initMap() {
             }
         };
+        injectionConfig.setMap(new HashMap<>(){{ put("model", modelName); }});
 
         injectionConfig.setFileCreate((configBuilder, fileType, filePath) -> {
 
@@ -267,6 +282,7 @@ public class CrapGenerator {
         strategy.setVersionFieldName("sys_version");
         strategy.setSuperMapperClass(baseMapper);
         strategy.setSuperServiceClass(getBaseDao());
+        strategy.setControllerMappingHyphenStyle(true);
         strategy.setSuperControllerClass(baseController);
         strategy.setTableFillList(getTableFillList());                          // 自动填充
         generator.setStrategy(strategy);

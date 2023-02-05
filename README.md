@@ -13,6 +13,38 @@ Crap make project easy.
 - code(xxx)             : 编码序列, 只能用在 code 字段上
 - encrypt(xxx)          : 字段自动加解密
 
+### 生成方式
+
+继承CrapGenerator类，调用generator方法即可
+
+``` java
+/**
+ * 代码生成
+ *
+ * @param packageName 包名
+ * @param packagePath 路径
+ * @param prefix      可通过前缀设定生成范围
+ * @param trimPrefix  清除前缀
+ * @param tables      包含的表, 与 prefix 指定的范围合并
+ * @param excludes    排除的表, 在 prefix 指定的范围中排除
+ * @param override    是否覆盖
+ * @param modelName   模块名称
+ */
+public void generate(String packageName, String packagePath, String prefix, String trimPrefix, String[] tables, String[] excludes, boolean override, String modelName);
+```
+
+## Url 配置
+
+格式 : /route/module/controller/method/id/action
+
+- route : 路由标识, 用于前端机做流量转发, 版本号, tid 等
+- module : 模块名, 对应前端 view 目录
+- controller: 控制器名, 对应前端 view 目录
+- method : 方法名, 对应前端 view 文件
+- id : 数据 id
+- action : 辅助标识, 用于标记页面动作, 如动态查询字典, 导入解析等
+- /module/controller/method 为权限标识, 不包含 id 和 action 部分, 也就是说菜单的 uri 只能包括这三级, 不能含有其他参数
+
 ## TODO
 
 - [x] 代码生成器，支持注释控制类型 例如List使用typeHandler自动解析
