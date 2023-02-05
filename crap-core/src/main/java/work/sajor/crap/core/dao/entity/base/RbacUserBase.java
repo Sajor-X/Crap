@@ -20,11 +20,11 @@ import java.time.LocalDateTime;
 
 /**
  * RBAC 用户
- * <p>
+ *
  * 数据表实体, 与数据库保持同步, 不可修改
  *
  * @author Sajor
- * @since 2023-01-08
+ * @since 2023-02-05
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -62,25 +62,25 @@ public class RbacUserBase implements Serializable, work.sajor.crap.core.mybatis.
     protected String username;
 
     /**
-     * no_prop(密码)
+     * ignore 密码
      */
-    @ApiModelProperty(value = "no_prop(密码)")
+    @ApiModelProperty(value = "ignore 密码")
     @TableField("`password`")
     @JsonIgnore
     protected String password;
 
     /**
-     * encrypt(姓名)
+     * encrypt 姓名
      */
-    @ApiModelProperty(value = "encrypt(姓名)")
+    @ApiModelProperty(value = "encrypt 姓名")
     @TableField(value = "`name`", typeHandler = AESEncryptHandler.class)
     @JsonProperty("name")
     protected String name;
 
     /**
-     * encrypt(手机号码)
+     * encrypt 手机号码
      */
-    @ApiModelProperty(value = "encrypt(手机号码)")
+    @ApiModelProperty(value = "encrypt 手机号码")
     @TableField(value = "`mobile`", typeHandler = AESEncryptHandler.class)
     @JsonProperty("mobile")
     protected String mobile;

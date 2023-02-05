@@ -106,7 +106,7 @@ public class ${entity} implements Serializable, ${baseEntity} {
     @Id
     @TableId("${field.name}")
         </#if>
-        <#-- 普通字段 -->
+    <#-- 普通字段 -->
     <#elseif field.fill??>
     <#-- -----   存在字段填充设置   ----->
         <#if field.convert>
@@ -133,7 +133,7 @@ public class ${entity} implements Serializable, ${baseEntity} {
     </#if>
     <#if field.comment?starts_with("prop(")>
         @JsonProperty("${field.comment?keep_after("(")?keep_before(")")?replace("([a-z])([A-Z]+)","$1_$2","r")?lower_case}")
-    <#elseif field.comment?starts_with("no_prop(")>
+    <#elseif field.comment?starts_with("ignore")>
         @JsonIgnore
     <#else>
         @JsonProperty("${field.name}")

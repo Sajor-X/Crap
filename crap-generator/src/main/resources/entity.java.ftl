@@ -33,22 +33,23 @@ public class ${table.serviceImplName} extends ${table.serviceImplName}Base {
         @AllArgsConstructor
         --- Rewrite this ---
         public enum ${field.propertyName?cap_first}Enum implements FieldEnum<${field.propertyType}> {
-      ON(1, "启用"),
-      OFF(0, "禁用");
+        ON(1, "启用"),
+        OFF(0, "禁用");
 
-      @JsonValue
-      private Integer value;
-      private String name;
-    }
-  </#if>
-  <#if field.comment?starts_with("json") && !field.comment?starts_with("json(")>
-     /**
-     * ${field.comment}
-     */
-     @Data
-     --- Rewrite this ---
-     public static class ${field.propertyName?cap_first}Bean {
-     }
-   </#if>
- </#list>
+        @JsonValue
+        private ${field.propertyType} value;
+        private String name;
+        }
+    </#if>
+    <#if field.comment?starts_with("json") && !field.comment?starts_with("json(")>
+        /**
+        * ${field.comment}
+        */
+        @Data
+        --- Rewrite this ---
+        public static class ${field.propertyName?cap_first}Bean {
+
+        }
+    </#if>
+</#list>
 }

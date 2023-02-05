@@ -17,11 +17,11 @@ import java.io.Serializable;
 
 /**
  * RBAC 用户-角色关联
- * <p>
+ *
  * 数据表实体, 与数据库保持同步, 不可修改
  *
  * @author Sajor
- * @since 2023-01-08
+ * @since 2023-02-05
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
