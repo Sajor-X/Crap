@@ -17,10 +17,10 @@ import work.sajor.crap.core.mybatis.handler.AESEncryptHandler;
 import ${baseEntity};
 <#list table.fields as field>
     <#if field.comment?starts_with("enum") && !field.comment?starts_with("enum(")>
-        import ${package.ServiceImpl}.${table.serviceImplName}.${field.propertyName?cap_first}Enum;
+import ${package.ServiceImpl}.${table.serviceImplName}.${field.propertyName?cap_first}Enum;
     </#if>
     <#if field.comment?starts_with("json") && !field.comment?starts_with("json(")>
-        import ${package.ServiceImpl}.${table.serviceImplName}.${field.propertyName?cap_first}Bean;
+import ${package.ServiceImpl}.${table.serviceImplName}.${field.propertyName?cap_first}Bean;
     </#if>
 </#list>
 <#if swagger2>
@@ -83,15 +83,15 @@ public class ${entity} implements Serializable, ${baseEntity} {
     <#-- 检查是否需要加密 -->
     <#assign isEncrypt = field.comment?starts_with("encrypt")>
     <#if field.comment!?length gt 0>
-        /**
-        * ${field.comment}
-        */
+    /**
+     * ${field.comment}
+     */
         <#if swagger2>
-            @ApiModelProperty(value = "${field.comment}")
+    @ApiModelProperty(value = "${field.comment}")
         <#else>
-            /**
-            * ${field.comment}
-            */
+    /**
+     * ${field.comment}
+     */
         </#if>
     </#if>
     <#if field.keyFlag>
@@ -132,11 +132,11 @@ public class ${entity} implements Serializable, ${baseEntity} {
     </#if>
     </#if>
     <#if field.comment?starts_with("prop(")>
-        @JsonProperty("${field.comment?keep_after("(")?keep_before(")")?replace("([a-z])([A-Z]+)","$1_$2","r")?lower_case}")
+    @JsonProperty("${field.comment?keep_after("(")?keep_before(")")?replace("([a-z])([A-Z]+)","$1_$2","r")?lower_case}")
     <#elseif field.comment?starts_with("ignore")>
-        @JsonIgnore
+    @JsonIgnore
     <#else>
-        @JsonProperty("${field.name}")
+    @JsonProperty("${field.name}")
     </#if>
     <#-- 乐观锁注解 -->
     <#if (versionFieldName!"") == field.name>

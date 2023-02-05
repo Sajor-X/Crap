@@ -1,5 +1,6 @@
 package work.sajor.crap.core.logger.facade.impl;
 
+import org.springframework.context.annotation.Primary;
 import work.sajor.crap.core.dao.dao.RbacPrivilegeDao;
 import work.sajor.crap.core.dao.entity.RbacPrivilege;
 import work.sajor.crap.core.logger.facade.OplogMenuProvider;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Primary
 public class OplogMenuProviderImpl implements OplogMenuProvider {
     
     @Autowired

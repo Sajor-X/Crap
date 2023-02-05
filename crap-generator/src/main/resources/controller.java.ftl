@@ -6,27 +6,27 @@ import ${package.Service}.${table.serviceName};
 import ${package.Entity}.${table.entityName};
 
 <#if superControllerClassPackage??>
-    import ${superControllerClassPackage};
+import ${superControllerClassPackage};
 </#if>
 
 /**
-* ${table.comment!} controller
-*
-* @author ${author}
-* @since ${date}
-*/
+ * ${table.comment!} controller
+ *
+ * @author ${author}
+ * @since ${date}
+ */
 @RestController
 @Slf4j
 @RequestMapping("<#if package.ModuleName??>${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.serviceImplName}</#if>")
 <#if kotlin>
-    class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
+class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
 <#else>
     <#if superControllerClass??>
-        public class ${table.controllerName} extends ${superControllerClass}<${table.serviceName}> {
+public class ${table.controllerName} extends ${superControllerClass}<${table.serviceName}> {
     <#else>
-        public class ${table.controllerName} {
+public class ${table.controllerName} {
     </#if>
 
 
-    }
+}
 </#if>
