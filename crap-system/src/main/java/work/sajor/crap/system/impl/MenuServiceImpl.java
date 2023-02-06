@@ -64,7 +64,7 @@ public class MenuServiceImpl implements MenuService {
         }
 
         // 批量创建子菜单
-        if (menuCreate.getChild() != null) {
+        if (menuCreate.getChildren() != null) {
 
             // 支持的子菜单类型
             HashMap<String, String> types = new HashMap<String, String>() {
@@ -79,7 +79,7 @@ public class MenuServiceImpl implements MenuService {
                 }
             };
 
-            for (String type : menuCreate.getChild()) {
+            for (String type : menuCreate.getChildren()) {
                 if (types.get(type) == null) {
                     continue;
                 }

@@ -3,26 +3,22 @@ package work.sajor.crap.system.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import work.sajor.crap.core.dao.entity.RbacPrivilege;
+import work.sajor.crap.core.dao.entity.RbacRole;
 
 import java.util.List;
 
 /**
  * <p>
- * 菜单创建DTO
+ * 角色授权
  * </p>
  *
  * @author Sajor
- * @since 2023-02-05
+ * @since 2023-02-06
  */
-
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class MenuCreateDTO extends RbacPrivilege {
+public class RbacRoleGrantDTO extends RbacRole {
 
-    /**
-     * 批量创建子菜单
-     */
-    @JsonProperty("children")
-    private List<String> children;
+    @JsonProperty("privilege_ids")
+    List<Long> privilegeIds;
 }
