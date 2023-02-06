@@ -1,0 +1,19 @@
+### menu add
+POST {{host}}/route/crap/menu/add
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "data": {
+    "pid": "0",
+    "name": "菜单控制",
+    "resource": "/crap/menu/",
+    "project": "crap",
+    "sort": 1,
+    "status": 1,
+    "show_flag": 1,
+    "type": 1,
+    "child": ["add", "edit", "list", "import", "export"]
+  }
+}
+

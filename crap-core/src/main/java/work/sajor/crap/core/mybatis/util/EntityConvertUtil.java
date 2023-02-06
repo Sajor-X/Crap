@@ -39,8 +39,8 @@ public class EntityConvertUtil {
      */
     @SneakyThrows
     public static <T> T convert(Class<T> entityClass, Object source) {
-        
-        if (ClassUtil.isBasicType(entityClass)) {                               // 包装类型
+
+        if (ClassUtil.isBasicType(entityClass) || entityClass.equals(String.class)) { // 包装类型
             return Convert.convert(entityClass, source);
         }
         
