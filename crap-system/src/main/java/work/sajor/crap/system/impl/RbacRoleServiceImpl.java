@@ -1,6 +1,7 @@
 package work.sajor.crap.system.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import work.sajor.crap.core.dao.dao.RbacRoleDao;
 import work.sajor.crap.core.dao.dao.RbacRolePrivilegeDao;
 import work.sajor.crap.core.dao.dao.RbacUserRoleDao;
@@ -30,6 +31,7 @@ import java.util.List;
  * @author Sajor
  * @since 2023-02-06
  */
+@Service
 public class RbacRoleServiceImpl implements RbacRoleService {
 
     @Resource

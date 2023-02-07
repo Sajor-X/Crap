@@ -66,14 +66,14 @@ public class RbacUserBase implements Serializable, work.sajor.crap.core.mybatis.
      */
     @ApiModelProperty(value = "ignore 密码")
     @TableField("`password`")
-    @JsonIgnore
+    @JsonProperty(value = "password", access = JsonProperty.Access.WRITE_ONLY)
     protected String password;
 
     /**
-     * encrypt 姓名
+     * 姓名
      */
-    @ApiModelProperty(value = "encrypt 姓名")
-    @TableField(value = "`name`", typeHandler = AESEncryptHandler.class)
+    @ApiModelProperty(value = "姓名")
+    @TableField(value = "`name`")
     @JsonProperty("name")
     protected String name;
 

@@ -10,7 +10,6 @@ import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import java.sql.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import work.sajor.crap.core.mybatis.support.TableCode;
 import work.sajor.crap.core.mybatis.handler.AESEncryptHandler;
@@ -134,7 +133,7 @@ public class ${entity} implements Serializable, ${baseEntity} {
     <#if field.comment?starts_with("prop(")>
     @JsonProperty("${field.comment?keep_after("(")?keep_before(")")?replace("([a-z])([A-Z]+)","$1_$2","r")?lower_case}")
     <#elseif field.comment?starts_with("ignore")>
-    @JsonIgnore
+    @JsonProperty(value = "${field.comment?keep_after("(")?keep_before(")")?replace("([a-z])([A-Z]+)","$1_$2","r")?lower_case}", access = JsonProperty.Access.WRITE_ONLY)
     <#else>
     @JsonProperty("${field.name}")
     </#if>
