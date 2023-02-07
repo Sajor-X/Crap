@@ -6,50 +6,6 @@ User-Agent: {{agent}}
 {"pageNo":1,"pageSize":2,"prefix":"","sort":[{"key":"code","order":"DESC"}],"where":[]}
 
 
-### 验证码
-GET {{host}}/crap/auth/captcha?ticket=1
-
-### 验证码 POST
-POST {{host}}/crap/auth/captcha?ticket=1&width=420&height=250
-
-> {%
-  client.global.set("captcha", JSON.parse(response.body).data);
-  client.log(JSON.parse(response.body).data);
-%}
-
-
-### 解析验证码
-POST http://auto.sajor.work/login_base
-Content-Type: application/json
-
-{
-  "base64": "{{captcha}}",
-  "count": 1,
-  "name": "erp",
-  "threshold": 200
-}
-
-> {%
-client.global.set("code", response.body);
-client.log(response.body);
-%}
-
-### 用户登陆接口
-POST {{host}}/crap/auth/login
-Content-Type: application/x-www-form-urlencoded; charset=UTF-8
-
-username=sys&password=sys&ticket=1&verify={code}
-
-> {%
-    client.global.set("auth_token", JSON.parse(response.body).data.token);
-    client.log(JSON.parse(response.body).data.token);
-%}
-
-### 用户注销
-POST {{host}}/crap/auth/logout
-Authorization: Bearer {{auth_token}}
-
-
 ### test
 GET {{host}}/test/hello
 Authorization: Bearer {{auth_token}}

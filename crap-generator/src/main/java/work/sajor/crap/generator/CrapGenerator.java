@@ -65,11 +65,23 @@ public class CrapGenerator {
     }
 
     public static void main(String[] args) {
-        new CrapGenerator().run();
+//        new CrapGenerator().run();
+        new CrapGenerator().adminRun();
 //        new CrapGenerator().securityRun();
 //        new CrapGenerator().logRun();
     }
 
+    public void adminRun() {
+        generate(
+                "work.sajor.crap.core.dao",
+                "/crap-core",
+                "crap_admin",
+                "crap_",
+                new String[]{},
+                new String[]{},
+                false
+        );
+    }
     public void logRun() {
         generate(
                 "work.sajor.crap.core.dao",
@@ -80,7 +92,6 @@ public class CrapGenerator {
                 new String[]{},
                 false
         );
-
     }
     public void run() {
         generate(

@@ -17,3 +17,7 @@ Content-Type: application/json
   }
 }
 
+### 系统入口
+POST {{host}}/route/crap/system/init
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json

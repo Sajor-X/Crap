@@ -45,6 +45,8 @@ public void generate(String packageName, String packagePath, String prefix, Stri
 - action : 辅助标识, 用于标记页面动作, 如动态查询字典, 导入解析等
 - /module/controller/method 为权限标识, 不包含 id 和 action 部分, 也就是说菜单的 uri 只能包括这三级, 不能含有其他参数
 
+module 为前端项目名，不同module内角色不同。
+
 ## TODO
 
 - [x] 代码生成器，支持注释控制类型 例如List使用typeHandler自动解析

@@ -30,7 +30,7 @@ Content-Type: application/json
 POST {{host}}/crap/auth/login
 Content-Type: application/x-www-form-urlencoded; charset=UTF-8
 
-username=sys&password=sys&ticket=1&verify=6ZrN
+username=sys&password=sys&ticket=1&verify=6Zr2
 # username=sys&password=sys&ticket=1&verify={code}
 
 > {%
@@ -41,4 +41,42 @@ username=sys&password=sys&ticket=1&verify=6ZrN
 ### 用户注销
 POST {{host}}/crap/auth/logout
 Authorization: Bearer {{auth_token}}
+
+### 用户密码修改
+POST {{host}}/route/crap/system/password
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "sign": "",
+  "timestamp": 1675765315417,
+  "data": {
+    "password": "sys",
+    "new_password": "123"
+  }
+}
+
+# ==========================================================================================
+
+### 用户注册
+POST {{host}}/route/crap/system/create-user
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "sign": "",
+  "timestamp": 1675765315417,
+  "data": {
+    "name": "测试名称",
+    "mobile": "13111122223",
+    "username": "13111122223",
+    "password": "9!0wT@4k",
+    "department_ids": [
+      "1350839640403349506",
+      "1350839759722909697",
+      "1350839956716785665"
+    ],
+    "remark": "测试名称的附属内容"
+  }
+}
 
